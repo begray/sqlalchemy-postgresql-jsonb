@@ -1,0 +1,18 @@
+# Use postgres/example user/password credentials
+version: '3.2'
+
+services:
+    db:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: example
+
+    notebook:
+        build: .
+        image: jupyter-notebook
+        volumes:
+          - type: bind
+            source: ./work
+            target: /home/jovyan/work
+        ports:
+            - 8888:8888
